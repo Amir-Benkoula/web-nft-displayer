@@ -1,8 +1,32 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import { Network, Alchemy } from 'alchemy-sdk'
+import NftFeed from '../components/NftFeed'
 
-export default function Home() {
+const settings = {
+    apiKey: process.env.ALCHEMY_API_KEY,
+    network: Network.ETH_MAINNET,
+};
+
+const alchemy = new Alchemy(settings);
+
+export async function getStaticProps() {
+  // Get all the NFTs owned by an address
+  const response = await alchemy.nft.getNftsForContract("0xB003ce92F3b2A8F3dd99207C351eAf05BC605262");
+
+  // retrieving spamInfo, metadataError and contract causes error
+  const nfts: any = response.nfts.map((nft) => {
+    const { spamInfo, metadataError, contract, ...rest } = nft;
+    return rest;
+  });
+
+  return {
+    props: {nfts}
+  }
+}
+
+export default function Home(props: any) {
   return (
     <div className={styles.container}>
       <Head>
@@ -12,46 +36,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.tsx</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+        <NftFeed nfts={props.nfts}/>
       </main>
 
       <footer className={styles.footer}>
