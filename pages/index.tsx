@@ -1,70 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-import { Network, Alchemy } from 'alchemy-sdk'
-import NftFeed from '../components/NftFeed'
-import MetaMaskSDK from '@metamask/sdk'
-
-const settings = {
-    apiKey: process.env.ALCHEMY_API_KEY,
-    network: Network.ETH_MAINNET,
-};
-
-const alchemy = new Alchemy(settings);
+import React, { useEffect, useState } from "react";
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
+import NftFeed from "../components/NftFeed";
+import WalletButton from "../components/WalletButton";
+import getNfts from "../service/getNfts";
 
 export async function getStaticProps() {
-
-  // Get all the NFTs owned by an address
-  let nfts: any = [];
-  for (let key = 0; key <= 900; key += 100) {
-  (await alchemy.nft.getNftsForContract("0xB003ce92F3b2A8F3dd99207C351eAf05BC605262", {pageSize: 100, pageKey: `${key}`})).nfts.forEach((nft) => {
-      // Returning spamInfo, metadataError and contract in props causes error
-      const { spamInfo, metadataError, contract, ...rest } = nft;
-      nfts.push(rest);
-    });
-  }
+  const nfts = await getNfts();
 
   return {
-    props: {nfts}
-  }
+    props: { nfts },
+  };
 }
 
 export default function Home(props: any) {
-  const [connection, setConnection] = useState(false);
-  const [walletId, setWalletId] = useState('');
-  
-  useEffect(() => {
-    const MMSDK = new MetaMaskSDK();
-
-    async function initialize() {
-      const accounts: any = await window.ethereum?.request({ method: 'eth_accounts' });
-      console.log(accounts);
-      if (typeof window.ethereum !== 'undefined' && accounts.length > 0) {
-        setConnection(true);
-        setWalletId(accounts[0]);
-      }
-    }
-
-    initialize();
-    window.addEventListener('load', initialize);
-
-    document.getElementById('connect-button')?.addEventListener('click', e => {
-      window.ethereum?.request({ method: 'eth_requestAccounts'}).then((accounts: any) => {
-        if (accounts && accounts.length > 0) {
-          setConnection(true);
-        }
-        setWalletId(accounts[0]);
-      }).catch(err => {
-        console.log(err);
-      });
-    });
-
-    return () => {
-      window.removeEventListener('load', initialize);
-    };
-  }, []);
-
-
   return (
     <div className={styles.container}>
       <Head>
@@ -74,12 +23,12 @@ export default function Home(props: any) {
       </Head>
 
       <header>
-        <button id='connect-button'>{connection ? walletId : 'Connect Metamask'}</button>
+        <WalletButton />
       </header>
 
       <main className={styles.main}>
-        <NftFeed nfts={props.nfts}/>
+        <NftFeed nfts={props.nfts} />
       </main>
     </div>
-  )
+  );
 }

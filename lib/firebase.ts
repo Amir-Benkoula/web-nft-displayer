@@ -10,22 +10,22 @@ import {
 } from "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyClVbwharTVL0frDbfZI22ZgFPMhhxP-B0",
-    authDomain: "capsule-corps-assessment.firebaseapp.com",
-    projectId: "capsule-corps-assessment",
-    storageBucket: "capsule-corps-assessment.appspot.com",
-    messagingSenderId: "700032666120",
-    appId: "1:700032666120:web:d60dca7f3d56c956a9dfbd"
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.MESSAGING_SENDER_ID,
+  appId: process.env.APP_ID,
 };
 
 function createFirebaseApp(config: any) {
-    try {
-      return getApp();
-    } catch {
-      return initializeApp(config);
-    }
+  try {
+    return getApp();
+  } catch {
+    return initializeApp(config);
   }
-  
+}
+
 // Create App
 const firebaseApp = createFirebaseApp(firebaseConfig);
 
@@ -35,7 +35,7 @@ export const firestore = getFirestore(firebaseApp);
 // Helper functions
 
 // function fillDatabase() {
-//     const 
+//     const
 // }
 
 /**`
@@ -43,11 +43,10 @@ export const firestore = getFirestore(firebaseApp);
  * @param  {QueryDocumentSnapshot<DocumentData>} doc
  */
 export function postToJSON(doc: DocumentData) {
-    const docData = doc.data();
-    return {
-      ...docData,
-      createdAt: docData.createdAt.toMillis(),
-      updatedAt: docData.updatedAt.toMillis(),
-    };
-  }
-  
+  const docData = doc.data();
+  return {
+    ...docData,
+    createdAt: docData.createdAt.toMillis(),
+    updatedAt: docData.updatedAt.toMillis(),
+  };
+}

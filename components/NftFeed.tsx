@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import ReactPaginate from 'react-paginate';
-import Image from 'next/image';
-import styles from '../styles/Home.module.css'
-import Link from 'next/link';
+import React, { useState } from "react";
+import ReactPaginate from "react-paginate";
+import Image from "next/image";
+import styles from "../styles/Home.module.css";
+import Link from "next/link";
 
 export default function NftFeed({ nfts }: any) {
   const [pageNumber, setPageNumber] = useState(0);
@@ -52,19 +52,19 @@ export default function NftFeed({ nfts }: any) {
 function NftItem({ nft }: any) {
   return (
     <div className={styles.card}>
-    <Link href={`/item/${nft.tokenId}`}>
-      <Image
-        className={styles.image}
-        src={nft.media[0].gateway}
-        alt="Picture of the 20Mint NFT"
-        width={300}
-        height={300}
-      />
-      <p>{nft.rawMetadata.name}</p>
-    </Link>
+      <Link href={`/item/${nft.tokenId}`}>
+        <Image
+          className={styles.image}
+          src={nft.media[0].gateway}
+          alt="Picture of the 20Mint NFT"
+          width={300}
+          height={300}
+        />
+        <p>{nft.rawMetadata.name}</p>
+      </Link>
       <ul className={styles.attributes}>
         {nft.rawMetadata.attributes.map((attribute: any, i: number) => {
-          return attribute.value !== 'None' ? (
+          return attribute.value !== "None" ? (
             <li key={i}>
               {attribute.trait_type} : {attribute.value}
             </li>
