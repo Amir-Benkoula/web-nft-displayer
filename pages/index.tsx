@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import NftFeed from "../components/NftFeed";
-import WalletButton from "../components/WalletButton";
 import getNfts from "../service/getNfts";
 import Navbar from "../components/Navbar";
 

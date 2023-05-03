@@ -1,22 +1,25 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
+import LikeButton from "./LikeButton";
+import { UserContext } from "../lib/context";
 
 export default function NftFeed({ nfts }: any) {
   const [pageNumber, setPageNumber] = useState(0);
+
   const nftsPerPage = 20;
   const pagesVisited = pageNumber * nftsPerPage;
 
   const displayNfts = nfts
     ? nfts
         .slice(pagesVisited, pagesVisited + nftsPerPage)
-        .map((nft: any) => <NftItem nft={nft} key={nft.id} />)
+        .map((nft: any) => <NftItem nft={nft} pageNumber={pageNumber} key={nft.id} />)
     : null;
 
   const pageCount = Math.ceil(nfts.length / nftsPerPage);
-
+  
   const changePage = ({ selected }: { selected: number }) => {
     setPageNumber(selected);
     window.scrollTo(0, 0);
@@ -49,7 +52,9 @@ export default function NftFeed({ nfts }: any) {
   );
 }
 
-function NftItem({ nft }: any) {
+function NftItem({ nft, pageNumber }: any) {
+  const {userId} = useContext(UserContext);
+
   return (
     <div className={styles.card}>
       <Link href={`/item/${nft.tokenId}`}>
@@ -71,16 +76,9 @@ function NftItem({ nft }: any) {
           ) : null;
         })}
       </ul>
-      <button>like</button>
+      {/* The key prop is used here to reload the button at each page change */}
+      {userId === "" ? null : <LikeButton nftId={nft.tokenId} key={`${nft.id}-${pageNumber}`}/>}
+      
     </div>
   );
 }
-
-// type NftType = {
-//     rawMetadata: {
-//         [key: string]: any,
-//     },
-//     media: {
-//         gateway: string
-//     }[]
-// }

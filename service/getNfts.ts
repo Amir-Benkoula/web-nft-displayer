@@ -2,6 +2,7 @@ import { alchemy } from "../lib/alchemy";
 
 export default async function getNfts() {
   // Get all the NFTs owned by an address
+  // Makes the loading really slow
   let nfts: any = [];
   for (let key = 0; key <= 900; key += 100) {
     (
