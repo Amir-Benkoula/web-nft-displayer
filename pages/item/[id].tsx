@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import { alchemy } from "../../lib/alchemy";
 import Image from "next/image";
+import { UserContext } from "../../lib/context";
 
 export async function getServerSideProps({ params }: any) {
   const { id } = params;
@@ -16,9 +18,12 @@ export async function getServerSideProps({ params }: any) {
 }
 
 export default function Item(props: any) {
+  const {userId} = useContext(UserContext);
+
   return (
     <div>
       <p>Item Id: {props.id}</p>
+      <p>User Id: {userId}</p>
       <Image src={props.imageUrl} alt="" width={500} height={500} />
     </div>
   );

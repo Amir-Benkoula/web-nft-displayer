@@ -71,6 +71,7 @@ function NftItem({ nft }: any) {
           ) : null;
         })}
       </ul>
+      <button>like</button>
     </div>
   );
 }

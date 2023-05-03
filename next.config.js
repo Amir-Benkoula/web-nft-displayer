@@ -5,13 +5,13 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "nft-cdn.alchemy.com",
-        port: "",
-        pathname: "/eth-mainnet/**",
+        protocol: 'https',
+        hostname: 'nft-cdn.alchemy.com',
+        port: '',
+        pathname: '/eth-mainnet/**',
       },
     ],
   },
-};
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig

@@ -1,19 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import styles from "../styles/Home.module.css";
 import MetaMaskSDK from "@metamask/sdk";
+import { UserContext } from "../lib/context";
 
 export default function WalletButton() {
   const [connection, setConnection] = useState(false);
-  const [walletId, setWalletId] = useState("");
+  const { userId, setUserId } = useContext(UserContext);
 
   useEffect(() => {
     async function initialize() {
       const accounts: any = await window.ethereum?.request({
         method: "eth_accounts",
       });
-      console.log(accounts);
-      if (typeof window.ethereum !== "undefined" && accounts.length > 0) {
+      if (typeof window.ethereum == "undefined" || accounts.length == 0) {
+        console.log("disconnected");
+        window.localStorage.setItem('userId', JSON.stringify(""));
+        setUserId("");
+      } else {
+        const localUserId = JSON.parse(window.localStorage.getItem('userId') || "");
         setConnection(true);
-        setWalletId(accounts[0]);
+        setUserId(localUserId);
       }
     }
 
@@ -28,8 +34,9 @@ export default function WalletButton() {
           .then((accounts: any) => {
             if (accounts && accounts.length > 0) {
               setConnection(true);
+              window.localStorage.setItem('userId', JSON.stringify(accounts[0]));
+              setUserId(accounts[0]);
             }
-            setWalletId(accounts[0]);
           })
           .catch((err) => {
             console.log(err);
@@ -39,11 +46,11 @@ export default function WalletButton() {
     return () => {
       window.removeEventListener("load", initialize);
     };
-  }, []);
+  }, [setUserId]);
 
   return (
-    <button id="connect-button">
-      {connection ? walletId : "Connect Metamask"}
+    <button className={styles.button} id="connect-button">
+      {connection ? userId : "Connect Metamask"}
     </button>
   );
 }
