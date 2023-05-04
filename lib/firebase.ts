@@ -17,7 +17,7 @@ const firebaseConfig = {
   projectId: "capsule-corps-assessment",
   storageBucket: "capsule-corps-assessment.appspot.com",
   messagingSenderId: "700032666120",
-  appId: "1:700032666120:web:d60dca7f3d56c956a9dfbd"
+  appId: "1:700032666120:web:d60dca7f3d56c956a9dfbd",
 };
 
 function createFirebaseApp(config: any) {
@@ -40,7 +40,7 @@ export const firestore = getFirestore(firebaseApp);
 //     const
 // }
 
-export async function getNftById( nftId: string ) {
+export async function getNftById(nftId: string) {
   const nftRefQuery = query(
     collection(firestore, "nfts"),
     where("id", "==", nftId),
@@ -54,7 +54,9 @@ export async function getNftById( nftId: string ) {
 
 export async function addNftToDb(nftId: string, docId: string, userId: string) {
   const nftDocRef = doc(firestore, "nfts", docId);
-  await setDoc(nftDocRef, { id: nftId, likes: [{ userId: userId }]}).then(() => console.log('Successfully added nft to firestore')).catch((err) => console.error(err));
+  await setDoc(nftDocRef, { id: nftId, likes: [{ userId: userId }] })
+    .then(() => console.log("Successfully added nft to firestore"))
+    .catch((err) => console.error(err));
 }
 /**`
  * Converts a firestore document to JSON

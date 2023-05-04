@@ -2,26 +2,9 @@
 
 .main {
   min-height: 100vh;
-  padding: 4rem 0;
-  margin-top: 2em;
+  padding: 6rem 0;
   flex: 1;
   display: flex;
-}
-
-.footer {
-  display: flex;
-  flex: 1;
-  padding: 2rem 0;
-  border-top: 1px solid #eaeaea;
-  justify-content: center;
-  align-items: center;
-}
-
-.footer a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
 }
 
 .title a {
@@ -85,7 +68,7 @@
 .card:focus,
 .card:active {
   color: #0070f3;
-  border-color: #0070f3;
+  box-shadow: 0 0 10px #0071f332;
 }
 
 .card h2 {
@@ -122,7 +105,7 @@
 
 .button {
   background-color: white;
-  border: 1px solid rgba(179, 179, 179, 0.477);;
+  border: 1px solid rgba(179, 179, 179, 0.477);
   color: rgb(37, 37, 37);
   padding: 7px 15px;
   border-radius: 10px;
@@ -137,7 +120,6 @@
   margin-bottom: 10em;
   top: 0;
   padding: 0 1rem;
-  font-weight: bold;
   border-bottom: 1px solid rgba(179, 179, 179, 0.477);
 }
 
@@ -150,6 +132,32 @@
   align-items: center;
   height: 100%;
   justify-content: right;
+}
+
+.nftContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+}
+
+.nftInfo {
+  margin: 3em;
+  display: inline-block;
+}
+
+.nftInfo ul {
+  list-style: none;
+  padding: 0;
+}
+
+.nftInfo h1 {
+  margin: 0 0 1em 0;
+}
+
+.nftImage {
+  width: clamp(20em, 50em, 50em);
+  height: clamp(20em, 50em, 50em);
 }
 
 @media (prefers-color-scheme: dark) {

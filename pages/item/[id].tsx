@@ -3,6 +3,9 @@ import { alchemy } from "../../lib/alchemy";
 import Image from "next/image";
 import { UserContext } from "../../lib/context";
 import { getLikes } from "../../service/getLikes";
+import styles from "../../styles/Home.module.css";
+import LikeButton from "../../components/LikeButton";
+import { Card, Space } from "antd";
 
 export async function getServerSideProps({ params }: any) {
   const { id } = params;
@@ -19,34 +22,53 @@ export async function getServerSideProps({ params }: any) {
 }
 
 export default function Item(props: any) {
-  const {userId} = useContext(UserContext);
   const [likers, setLikers] = useState([]);
+  const { userId } = useContext(UserContext);
 
   useEffect(() => {
-        async function fetchLikes() {
-            const likes = await getLikes(props.id);
-            
-            setLikers(likes);
-        }
+    async function fetchLikes() {
+      const likes = await getLikes(props.id);
 
-        fetchLikes();
-  }, [props.id]);
+      setLikers(likes);
+    }
+
+    fetchLikes();
+  }, [likers, props.id]);
 
   return (
-    <div>
-      <p>Item Id: {props.id}</p>
-      <p>User Id: {userId}</p>
-      <Image src={props.imageUrl} alt="" width={500} height={500} />
-      <p>Number of likes {likers.length}</p>
-      <ul>
-        {likers.map((liker: any, i: number) => {
-          return liker.userId !== "" ? (
-            <li key={i}>
-              {liker.userId}
-            </li>
-          ) : null;
-        })}
-      </ul>
-    </div>
+    <main className={styles.main}>
+      <div className={styles.nftContainer}>
+        <div className={styles.card}>
+          {/* <Image className={styles.image} src={props.imageUrl} alt="" 
+                    width={500}
+                    height={500}
+                /> */}
+          <img
+            className={styles.nftImage}
+            src={props.imageUrl}
+            alt={`Typewriter #${props.id} image`}
+          />
+        </div>
+        <div className={styles.nftInfo}>
+          <h1>20 Mint Typewriter #{props.id}</h1>
+
+          <Space direction="vertical">
+            <Card
+              title="Likes"
+              extra={<div className={styles.likeCount}>{likers.length}</div>}
+              style={{ width: 500, textAlign: "left" }}
+            >
+              <ul>
+                {likers
+                  .filter((liker: any) => liker.userId !== "")
+                  .map((liker: any, i: number) => (
+                    <li key={i}>{liker.userId}</li>
+                  ))}
+              </ul>
+            </Card>
+          </Space>
+        </div>
+      </div>
+    </main>
   );
 }

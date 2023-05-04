@@ -7,6 +7,8 @@ export default function WalletButton() {
   const [connection, setConnection] = useState(false);
   const { userId, setUserId } = useContext(UserContext);
 
+  const shortUserId = userId.slice(0, 5) + "..." + userId.slice(-4);
+
   useEffect(() => {
     async function initialize() {
       const accounts: any = await window.ethereum?.request({
@@ -14,10 +16,12 @@ export default function WalletButton() {
       });
       if (typeof window.ethereum == "undefined" || accounts.length == 0) {
         console.log("disconnected");
-        window.localStorage.setItem('userId', JSON.stringify(""));
+        window.localStorage.setItem("userId", JSON.stringify(""));
         setUserId("");
       } else {
-        const localUserId = JSON.parse(window.localStorage.getItem('userId') || "");
+        const localUserId = JSON.parse(
+          window.localStorage.getItem("userId") || ""
+        );
         setConnection(true);
         setUserId(localUserId);
       }
@@ -34,7 +38,10 @@ export default function WalletButton() {
           .then((accounts: any) => {
             if (accounts && accounts.length > 0) {
               setConnection(true);
-              window.localStorage.setItem('userId', JSON.stringify(accounts[0]));
+              window.localStorage.setItem(
+                "userId",
+                JSON.stringify(accounts[0])
+              );
               setUserId(accounts[0]);
             }
           })
@@ -50,7 +57,7 @@ export default function WalletButton() {
 
   return (
     <button className={styles.button} id="connect-button">
-      {connection ? userId : "Connect Metamask"}
+      {connection ? shortUserId : "Connect Metamask"}
     </button>
   );
 }
