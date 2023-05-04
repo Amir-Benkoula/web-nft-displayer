@@ -10,4 +10,5 @@ const userContext: UserContextType = {
   setUserId: () => {},
 };
 
+// To get the state of the connection
 export const UserContext = createContext(userContext);

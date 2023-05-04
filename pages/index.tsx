@@ -22,6 +22,7 @@ export default function Home(props: any) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
+        <Navbar />
         <NftFeed nfts={props.nfts} />
       </main>
     </div>

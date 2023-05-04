@@ -36,10 +36,6 @@ export const firestore = getFirestore(firebaseApp);
 
 // Helper functions
 
-// function fillDatabase() {
-//     const
-// }
-
 export async function getNftById(nftId: string) {
   const nftRefQuery = query(
     collection(firestore, "nfts"),
@@ -52,21 +48,10 @@ export async function getNftById(nftId: string) {
   return nftDoc;
 }
 
+// Since the db is not filled, this function adds an nft to the db if it is not yet
 export async function addNftToDb(nftId: string, docId: string, userId: string) {
   const nftDocRef = doc(firestore, "nfts", docId);
   await setDoc(nftDocRef, { id: nftId, likes: [{ userId: userId }] })
     .then(() => console.log("Successfully added nft to firestore"))
     .catch((err) => console.error(err));
-}
-/**`
- * Converts a firestore document to JSON
- * @param  {QueryDocumentSnapshot<DocumentData>} doc
- */
-export function postToJSON(doc: DocumentData) {
-  const docData = doc.data();
-  return {
-    ...docData,
-    createdAt: docData.createdAt.toMillis(),
-    updatedAt: docData.updatedAt.toMillis(),
-  };
 }

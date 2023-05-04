@@ -6,5 +6,5 @@ export default async function getNftMedatata(id: number) {
     id,
     {}
   );
-  const imageUrl = response.media[0].gateway;
+  return response;
 }

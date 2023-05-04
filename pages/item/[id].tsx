@@ -1,19 +1,16 @@
 import { useContext, useEffect, useState } from "react";
 import { alchemy } from "../../lib/alchemy";
-import Image from "next/image";
 import { UserContext } from "../../lib/context";
 import { getLikes } from "../../service/getLikes";
 import styles from "../../styles/Home.module.css";
-import LikeButton from "../../components/LikeButton";
 import { Card, Space } from "antd";
+import getNftMedatata from "../../service/getNftMetadata";
 
 export async function getServerSideProps({ params }: any) {
   const { id } = params;
-  const response = await alchemy.nft.getNftMetadata(
-    "0xB003ce92F3b2A8F3dd99207C351eAf05BC605262",
-    id,
-    {}
-  );
+
+  const response = await getNftMedatata(id);
+
   const imageUrl = response.media[0].gateway;
 
   return {
@@ -23,7 +20,6 @@ export async function getServerSideProps({ params }: any) {
 
 export default function Item(props: any) {
   const [likers, setLikers] = useState([]);
-  const { userId } = useContext(UserContext);
 
   useEffect(() => {
     async function fetchLikes() {
@@ -39,10 +35,6 @@ export default function Item(props: any) {
     <main className={styles.main}>
       <div className={styles.nftContainer}>
         <div className={styles.card}>
-          {/* <Image className={styles.image} src={props.imageUrl} alt="" 
-                    width={500}
-                    height={500}
-                /> */}
           <img
             className={styles.nftImage}
             src={props.imageUrl}

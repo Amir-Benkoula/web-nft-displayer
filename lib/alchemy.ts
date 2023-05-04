@@ -5,4 +5,5 @@ const settings = {
   network: Network.ETH_MAINNET,
 };
 
+// Alchemy export
 export const alchemy = new Alchemy(settings);

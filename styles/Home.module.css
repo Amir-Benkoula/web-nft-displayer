@@ -1,5 +1,3 @@
-@import "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css";
-
 .main {
   min-height: 100vh;
   padding: 6rem 0;
@@ -113,6 +111,7 @@
 }
 
 .navbar {
+  z-index: 2;
   height: 70px;
   width: 100%;
   background: white;
@@ -156,8 +155,43 @@
 }
 
 .nftImage {
-  width: clamp(20em, 50em, 50em);
-  height: clamp(20em, 50em, 50em);
+  width: clamp(20em, 45em, 45em);
+  height: clamp(20em, 45em, 45em);
+}
+
+.paginationContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.filter {
+  display: flex;
+  align-items: center;
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 0 10px rgb(208, 208, 208);
+  padding: 10px;
+}
+
+.filter label {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.filter input {
+  flex-grow: 1;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  background-color: white;
+}
+.filter:hover {
+  box-shadow: 0 0 10px #0071f332;
 }
 
 @media (prefers-color-scheme: dark) {

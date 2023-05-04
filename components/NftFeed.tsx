@@ -1,55 +1,62 @@
-import React, { useContext, useEffect, useState } from "react";
-import ReactPaginate from "react-paginate";
+import React, { useContext, useState } from "react";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
 import LikeButton from "./LikeButton";
 import { UserContext } from "../lib/context";
+import { Pagination } from "antd";
+import { filterNftsByAttribute } from "../service/filterNftsByAttribute";
 
 export default function NftFeed({ nfts }: any) {
-  const [pageNumber, setPageNumber] = useState(0);
-
+  const [pageNumber, setPageNumber] = useState(1);
+  const [filter, setFilter] = useState("");
   const nftsPerPage = 20;
-  const pagesVisited = pageNumber * nftsPerPage;
+  const pagesVisited = (pageNumber - 1) * nftsPerPage;
 
-  const displayNfts = nfts
-    ? nfts
+  const filteredNfts = filterNftsByAttribute(filter, nfts);
+
+  const displayNfts = filteredNfts
+    ? filteredNfts
         .slice(pagesVisited, pagesVisited + nftsPerPage)
         .map((nft: any) => (
           <NftItem nft={nft} pageNumber={pageNumber} key={nft.id} />
         ))
     : null;
 
-  const pageCount = Math.ceil(nfts.length / nftsPerPage);
-
-  const changePage = ({ selected }: { selected: number }) => {
-    setPageNumber(selected);
+  const changePage = (page: number) => {
+    setPageNumber(page);
     window.scrollTo(0, 0);
+  };
+
+  const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFilter(e.target.value);
+    setPageNumber(1); // reset page number when changing filter
+    console.log(filteredNfts);
+    console.log(nfts[0]);
   };
 
   return (
     <div>
+      <div className={styles.filter}>
+        <label htmlFor="filter">Filter by attribute</label>
+        <input
+          id="filter"
+          type="text"
+          value={filter}
+          onChange={handleFilterChange}
+        />
+      </div>
       <div className={styles.feed}>{displayNfts}</div>
-      <ReactPaginate
-        nextLabel=">"
-        pageCount={pageCount}
-        onPageChange={changePage}
-        pageRangeDisplayed={3}
-        marginPagesDisplayed={2}
-        previousLabel="<"
-        pageClassName="page-item"
-        pageLinkClassName="page-link"
-        previousClassName="page-item"
-        previousLinkClassName="page-link"
-        nextClassName="page-item"
-        nextLinkClassName="page-link"
-        breakLabel="..."
-        breakClassName="page-item"
-        breakLinkClassName="page-link"
-        containerClassName="pagination justify-content-center mt-4"
-        activeClassName="active"
-        renderOnZeroPageCount={null}
-      />
+      <div className={styles.paginationContainer}>
+        <Pagination
+          current={pageNumber}
+          total={filteredNfts.length}
+          pageSize={nftsPerPage}
+          onChange={changePage}
+          showSizeChanger={false}
+          showQuickJumper={false}
+        />
+      </div>
     </div>
   );
 }
@@ -63,13 +70,14 @@ function NftItem({ nft, pageNumber }: any) {
         <Image
           className={styles.image}
           src={nft.media[0].gateway}
-          alt="Picture of the 20Mint NFT"
+          alt={`Typewriter #${nft.tokenId}`}
           width={300}
           height={300}
         />
         <p>{nft.rawMetadata.name}</p>
       </Link>
       <ul className={styles.attributes}>
+        {/* Mapping attributes to a list */}
         {nft.rawMetadata.attributes.map((attribute: any, i: number) => {
           return attribute.value !== "None" ? (
             <li key={i}>
@@ -80,7 +88,7 @@ function NftItem({ nft, pageNumber }: any) {
       </ul>
       {/* The key prop is used here to reload the button at each page change */}
       {userId === "" ? null : (
-        <LikeButton nftId={nft.tokenId} key={`${nft.id}-${pageNumber}`} />
+        <LikeButton nftId={nft.tokenId} key={pageNumber} />
       )}
     </div>
   );
