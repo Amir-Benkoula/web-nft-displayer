@@ -190,9 +190,6 @@
   outline: none;
   background-color: white;
 }
-.filter:hover {
-  box-shadow: 0 0 10px #0071f332;
-}
 
 @media (prefers-color-scheme: dark) {
   .card,

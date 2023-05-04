@@ -17,7 +17,6 @@ export default function WalletButton() {
       });
       // If not connected sets the user id to an empty string, else, sets the id to the wallet id
       if (typeof window.ethereum == "undefined" || accounts.length == 0) {
-        console.log("disconnected");
         window.localStorage.setItem("userId", JSON.stringify(""));
         setUserId("");
       } else {

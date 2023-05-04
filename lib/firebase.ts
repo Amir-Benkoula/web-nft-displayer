@@ -52,6 +52,5 @@ export async function getNftById(nftId: string) {
 export async function addNftToDb(nftId: string, docId: string, userId: string) {
   const nftDocRef = doc(firestore, "nfts", docId);
   await setDoc(nftDocRef, { id: nftId, likes: [{ userId: userId }] })
-    .then(() => console.log("Successfully added nft to firestore"))
     .catch((err) => console.error(err));
 }

@@ -1,10 +1,10 @@
-export function filterNftsByAttribute(filter: string, nfts: any) {
+export function filterNfts(filter: string, nfts: any) {
   let filteredNfts: any[] = [];
 
   nfts.forEach((nft: any) => {
     const attributes = nft.rawMetadata.attributes;
     attributes.forEach((attribute: any) => {
-      if (attribute.value.toLowerCase() === filter.toLowerCase()) {
+      if (attribute.value.toLowerCase() === filter.toLowerCase() || nft.tokenId === filter) {
         filteredNfts.push(nft);
       }
     });

@@ -5,7 +5,8 @@ import Link from "next/link";
 import LikeButton from "./LikeButton";
 import { UserContext } from "../lib/context";
 import { Pagination } from "antd";
-import { filterNftsByAttribute } from "../service/filterNftsByAttribute";
+import { filterNfts } from "../service/filterNfts";
+import { SearchOutlined } from "@ant-design/icons";
 
 export default function NftFeed({ nfts }: any) {
   const [pageNumber, setPageNumber] = useState(1);
@@ -13,13 +14,13 @@ export default function NftFeed({ nfts }: any) {
   const nftsPerPage = 20;
   const pagesVisited = (pageNumber - 1) * nftsPerPage;
 
-  const filteredNfts = filterNftsByAttribute(filter, nfts);
+  const filteredNfts = filterNfts(filter, nfts);
 
   const displayNfts = filteredNfts
     ? filteredNfts
         .slice(pagesVisited, pagesVisited + nftsPerPage)
         .map((nft: any) => (
-          <NftItem nft={nft} pageNumber={pageNumber} key={nft.id} />
+          <NftItem nft={nft} pageNumber={pageNumber} filter={filter.length} key={nft.id} />
         ))
     : null;
 
@@ -31,19 +32,18 @@ export default function NftFeed({ nfts }: any) {
   const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilter(e.target.value);
     setPageNumber(1); // reset page number when changing filter
-    console.log(filteredNfts);
-    console.log(nfts[0]);
   };
 
   return (
     <div>
       <div className={styles.filter}>
-        <label htmlFor="filter">Filter by attribute</label>
+        <label htmlFor="filter"><SearchOutlined /></label>
         <input
           id="filter"
           type="text"
           value={filter}
           onChange={handleFilterChange}
+          placeholder="Search by attribute or item number"
         />
       </div>
       <div className={styles.feed}>{displayNfts}</div>
@@ -61,7 +61,7 @@ export default function NftFeed({ nfts }: any) {
   );
 }
 
-function NftItem({ nft, pageNumber }: any) {
+function NftItem({ nft, pageNumber, filter }: any) {
   const { userId } = useContext(UserContext);
 
   return (
@@ -88,7 +88,7 @@ function NftItem({ nft, pageNumber }: any) {
       </ul>
       {/* The key prop is used here to reload the button at each page change */}
       {userId === "" ? null : (
-        <LikeButton nftId={nft.tokenId} key={pageNumber} />
+        <LikeButton nftId={nft.tokenId} key={pageNumber + "_" + filter} />
       )}
     </div>
   );
