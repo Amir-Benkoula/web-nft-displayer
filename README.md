@@ -1,4 +1,3 @@
-
 # 20 Mint Nft Web App
 
 This app is my submission to an assessment. It is available at https://web-nft-displayer.vercel.app/
@@ -20,7 +19,6 @@ To run this project, you will need to add the following environment variables to
 `NEXT_PUBLIC_MESSAGING_SENDER_ID`
 
 `NEXT_PUBLIC_APP_ID`
-
 
 ## Run Locally
 
@@ -49,6 +47,7 @@ Start the server
 ```
 
 You are ready to use the app at https://localhost:3000/ !
+
 ## Authors
 
 - [@Amir-Benkoula](https://github.com/Amir-Benkoula)

@@ -1,4 +1,3 @@
-import Navbar from "../components/Navbar";
 import NftFeed from "../components/NftFeed";
 import { getTopNfts } from "../lib/firebase";
 import getNftMedatata from "../service/getNftMetadata";
