@@ -88,6 +88,13 @@
   position: absolute;
   left: 4em;
 }
+
+@media screen and (max-width: 570px) {
+  .logoText {
+    display: none;
+  }
+}
+
 .image {
   border-radius: 10px;
 }
