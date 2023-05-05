@@ -65,8 +65,7 @@
 .card:hover,
 .card:focus,
 .card:active {
-  color: #0070f3;
-  box-shadow: 0 0 10px #0071f332;
+  box-shadow: 0 0 20px rgb(208, 208, 208);
 }
 
 .card h2 {
@@ -81,10 +80,14 @@
 }
 
 .logo {
-  height: 1em;
-  margin-left: 0.5rem;
+  position: absolute;
+  left: 0%;
 }
 
+.logoText {
+  position: absolute;
+  left: 4em;
+}
 .image {
   border-radius: 10px;
 }
@@ -105,9 +108,16 @@
   background-color: white;
   border: 1px solid rgba(179, 179, 179, 0.477);
   color: rgb(37, 37, 37);
+  margin: 0 7px;
   padding: 7px 15px;
   border-radius: 10px;
   right: 0;
+}
+
+.button:hover {
+  color: white;
+  background-color: #0070f3;
+  cursor: pointer;
 }
 
 .navbar {
@@ -191,15 +201,6 @@
   background-color: white;
 }
 
-@media (prefers-color-scheme: dark) {
-  .card,
-  .footer {
-    border-color: #222;
-  }
-  .code {
-    background: #111;
-  }
-  .logo img {
-    filter: invert(1);
-  }
+.likeButton:hover {
+  color: #5dade2;
 }

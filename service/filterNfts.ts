@@ -4,7 +4,10 @@ export function filterNfts(filter: string, nfts: any) {
   nfts.forEach((nft: any) => {
     const attributes = nft.rawMetadata.attributes;
     attributes.forEach((attribute: any) => {
-      if (attribute.value.toLowerCase() === filter.toLowerCase() || nft.tokenId === filter) {
+      if (
+        attribute.value.toLowerCase() === filter.toLowerCase() ||
+        nft.tokenId === filter
+      ) {
         filteredNfts.push(nft);
       }
     });

@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import NftFeed from "../components/NftFeed";
@@ -14,7 +14,6 @@ export async function getStaticProps() {
 }
 
 export default function Home(props: any) {
-  
   return (
     <div>
       <Head>
@@ -23,8 +22,7 @@ export default function Home(props: any) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <Navbar/>
-        <NftFeed nfts={props.nfts} />
+        <NftFeed nfts={props.nfts} onlyFeed={false} />
       </main>
     </div>
   );

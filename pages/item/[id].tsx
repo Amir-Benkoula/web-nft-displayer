@@ -5,6 +5,7 @@ import { getLikes } from "../../service/getLikes";
 import styles from "../../styles/Home.module.css";
 import { Card, Space } from "antd";
 import getNftMedatata from "../../service/getNftMetadata";
+import Image from "next/image";
 
 export async function getServerSideProps({ params }: any) {
   const { id } = params;
@@ -35,10 +36,12 @@ export default function Item(props: any) {
     <main className={styles.main}>
       <div className={styles.nftContainer}>
         <div className={styles.card}>
-          <img
+          <Image
             className={styles.nftImage}
             src={props.imageUrl}
             alt={`Typewriter #${props.id} image`}
+            width={500}
+            height={500}
           />
         </div>
         <div className={styles.nftInfo}>
