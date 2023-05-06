@@ -1,11 +1,7 @@
 .feedContainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  text-align: center;
+  display:inline;
   width: 100%;
   min-width: 380px;
-  align-items: center;
 }
 
 .filter {
