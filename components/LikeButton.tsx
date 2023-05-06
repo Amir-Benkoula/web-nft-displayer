@@ -3,7 +3,7 @@ import { UserContext } from "../lib/context";
 import { likeNft } from "../service/likeNft";
 import { getLikes } from "../service/getLikes";
 import { HeartOutlined, HeartTwoTone } from "@ant-design/icons";
-import styles from "../styles/Home.module.css";
+import styles from "../styles/components/LikeButton.module.css";
 
 export default function LikeButton(props: any) {
   const { userId } = useContext(UserContext);
@@ -34,7 +34,6 @@ export default function LikeButton(props: any) {
   return isLiked ? (
     <div className={styles.likeButton}>
       <HeartTwoTone
-        className={styles.heartTwoTone}
         style={{ fontSize: "1.5em" }}
         twoToneColor="#5DADE2"
         onClick={likeButtonHandler}
@@ -44,7 +43,6 @@ export default function LikeButton(props: any) {
   ) : (
     <div className={styles.likeButton}>
       <HeartOutlined
-        className={styles.heartOutlined}
         style={{ fontSize: "1.5em", color: "gray" }}
         onClick={likeButtonHandler}
       />

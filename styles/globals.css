@@ -14,3 +14,19 @@ a {
 * {
   box-sizing: border-box;
 }
+
+button {
+  background-color: white;
+  border: 1px solid rgba(179, 179, 179, 0.477);
+  color: rgb(37, 37, 37);
+  margin: 0 7px;
+  padding: 7px 15px;
+  border-radius: 10px;
+  right: 0;
+}
+
+button:hover {
+  color: white;
+  background-color: #0070f3;
+  cursor: pointer;
+}

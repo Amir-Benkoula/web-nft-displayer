@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import styles from "../styles/Home.module.css";
 import MetaMaskSDK from "@metamask/sdk";
 import { UserContext } from "../lib/context";
 
@@ -58,7 +57,7 @@ export default function WalletButton() {
   }, [setUserId]);
 
   return (
-    <button className={styles.button} id="connect-button">
+    <button id="connect-button">
       {connection ? shortUserId : "Connect Metamask"}
     </button>
   );

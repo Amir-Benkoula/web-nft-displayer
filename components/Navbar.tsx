@@ -1,5 +1,5 @@
 import WalletButton from "./WalletButton";
-import styles from "../styles/Home.module.css";
+import styles from "../styles/components/Navbar.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import ccl_logo from "../public/ccl_logo.svg";

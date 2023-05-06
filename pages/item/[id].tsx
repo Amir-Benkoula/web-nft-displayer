@@ -1,9 +1,7 @@
-import { useContext, useEffect, useState } from "react";
-import { alchemy } from "../../lib/alchemy";
-import { UserContext } from "../../lib/context";
+import { useEffect, useState } from "react";
 import { getLikes } from "../../service/getLikes";
-import styles from "../../styles/Home.module.css";
-import { Card, Space } from "antd";
+import styles from "../../styles/Item.module.css";
+import { Card } from "antd";
 import getNftMedatata from "../../service/getNftMetadata";
 import Image from "next/image";
 
@@ -34,34 +32,27 @@ export default function Item(props: any) {
 
   return (
     <main className={styles.main}>
-      <div className={styles.nftContainer}>
-        <div className={styles.card}>
-          <Image
-            className={styles.nftImage}
-            src={props.imageUrl}
-            alt={`Typewriter #${props.id} image`}
-            width={500}
-            height={500}
-          />
-        </div>
+      <div className={styles.itemContainer}>
+        <img
+          className={styles.image}
+          src={props.imageUrl}
+          alt={`Typewriter #${props.id} image`}
+        />
         <div className={styles.nftInfo}>
           <h1>20 Mint Typewriter #{props.id}</h1>
-
-          <Space direction="vertical">
-            <Card
-              title="Likes"
-              extra={<div className={styles.likeCount}>{likers.length}</div>}
-              style={{ width: 500, textAlign: "left" }}
-            >
-              <ul>
-                {likers
-                  .filter((liker: any) => liker.userId !== "")
-                  .map((liker: any, i: number) => (
-                    <li key={i}>{liker.userId}</li>
-                  ))}
-              </ul>
-            </Card>
-          </Space>
+          <Card
+            title="Likes"
+            extra={<div>{likers.length}</div>}
+            style={{ textAlign: "left" }}
+          >
+            <ul>
+              {likers
+                .filter((liker: any) => liker.userId !== "")
+                .map((liker: any, i: number) => (
+                  <li key={i}>{liker.userId}</li>
+                ))}
+            </ul>
+          </Card>
         </div>
       </div>
     </main>

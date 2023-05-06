@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import Image from "next/image";
-import styles from "../styles/Home.module.css";
+import styles from "../styles/components/NftFeed.module.css";
 import Link from "next/link";
 import LikeButton from "./LikeButton";
 import { UserContext } from "../lib/context";
@@ -41,7 +41,7 @@ export default function NftFeed(props: any) {
   };
 
   return (
-    <div>
+    <div className={styles.feedContainer}>
       {!props.onlyFeed && (
         <div className={styles.filter}>
           <label htmlFor="filter">

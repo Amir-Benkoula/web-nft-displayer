@@ -59,7 +59,7 @@ export async function getTopNfts() {
   const topNftsQuery = query(
     collection(firestore, "nfts"),
     orderBy("likes", "desc"),
-    limit(20)
+    limit(10)
   );
 
   const topNftsSnapshot = await getDocs(topNftsQuery);
