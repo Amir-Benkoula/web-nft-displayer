@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
-import { getLikes } from "../../service/getLikes";
-import styles from "../../styles/Item.module.css";
+import { getLikes } from "../../../service/getLikes";
+import styles from "../../../styles/Item.module.css";
 import { Card } from "antd";
-import getNftMedatata from "../../service/getNftMetadata";
+import getNftMedatata from "../../../service/getNftMetadata";
 import Image from "next/image";
 
 export async function getServerSideProps({ params }: any) {
-  const { id } = params;
+  const { id, contractAddress } = params;
+  
+  const response = await getNftMedatata(id, contractAddress);
 
-  const response = await getNftMedatata(id);
+  console.log('oe',response);
 
   const imageUrl = response.media[0].gateway;
 
