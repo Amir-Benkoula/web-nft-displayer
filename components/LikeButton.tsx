@@ -14,7 +14,7 @@ export default function LikeButton(props: any) {
   useEffect(() => {
     // Retrieve like status of an item to show the correct button
     async function fetchLikeStatus() {
-      const likes = await getLikes(props.nftId);
+      const likes = await getLikes(props.nftId, props.contractAddress);
       setLikeNumber(likes.length);
       if (likes.some((like: any) => like.userId === userId)) {
         setIsLiked(true);
@@ -25,7 +25,7 @@ export default function LikeButton(props: any) {
   });
 
   async function likeButtonHandler() {
-    const response = await likeNft(props.nftId, userId);
+    const response = await likeNft(props.nftId, userId, props.contractAddress);
 
     setIsLiked(response);
   }

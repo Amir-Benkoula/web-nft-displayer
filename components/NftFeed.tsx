@@ -25,6 +25,7 @@ export default function NftFeed(props: any) {
             nft={nft}
             pageNumber={pageNumber}
             filter={filter.length}
+            contractAddress={props.contractAddress}
             key={nft.id}
           />
         ))
@@ -42,6 +43,7 @@ export default function NftFeed(props: any) {
 
   return (
     <div className={styles.feedContainer}>
+      <h1>{props.collectionName}</h1>
       {!props.onlyFeed && (
         <div className={styles.filter}>
           <label htmlFor="filter">
@@ -78,7 +80,7 @@ function NftItem(props: any) {
 
   return (
     <div className={styles.card}>
-      <Link href={`/item/${props.nft.tokenId}`}>
+      <Link href={`/contract/${props.contractAddress}/item/${props.nft.tokenId}`}>
         <Image
           className={styles.image}
           src={props.nft.media[0].gateway}
@@ -104,6 +106,7 @@ function NftItem(props: any) {
       {userId === "" ? null : (
         <LikeButton
           nftId={props.nft.tokenId}
+          contractAddress={props.contractAddress}
           key={props.pageNumber + "_" + props.filter}
         />
       )}

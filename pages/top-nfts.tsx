@@ -7,13 +7,15 @@ import styles from "../styles/Home.module.css";
 export async function getStaticProps() {
   const topNftIds = await getTopNfts();
 
+  console.log(topNftIds);
+  
   const topNfts: any = [];
 
   const nfts: any = [];
 
   for (let i in topNftIds) {
-    const response = await getNftMedatata(topNftIds[i]);
-    topNfts.push(response);
+    // const response = await getNftMedatata(topNftIds[i]);
+    // topNfts.push(response);
   }
 
   topNfts.forEach((nft: any) => {
