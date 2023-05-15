@@ -1,9 +1,9 @@
 import { collection, doc, getDoc, updateDoc } from "firebase/firestore";
 import { addNftToDb, firestore } from "../lib/firebase";
 
-export async function likeNft(nftId: string, userId: string) {
+export async function likeNft(nftId: string, userId: string, contractAddress: string) {
   // Retrieve nft document
-  const docId = `typewriter-${nftId}`;
+  const docId = `${contractAddress}-item-${nftId}`;
   const nftRef = doc(collection(firestore, "nfts"), docId);
   const nftDoc = await getDoc(nftRef);
 

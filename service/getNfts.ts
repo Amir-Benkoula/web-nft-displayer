@@ -1,10 +1,15 @@
 import { alchemy } from "../lib/alchemy";
+import getContractMetadata from "./getContractMetadata";
 
 export default async function getNfts(contractAddress: string) {
   
+  // const totalSupply = (await getContractMetadata(contractAddress)).totalSupply;
+
+  // console.log(Number(totalSupply));
+
   // Get all the NFTs owned by an address
   let nfts: any = [];
-  for (let key = 0; key <= 900; key += 100) {
+  for (let key = 0; key <= 100; key += 100) {
     (
       await alchemy.nft.getNftsForContract(
         contractAddress,

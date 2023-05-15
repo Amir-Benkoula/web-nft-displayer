@@ -43,6 +43,7 @@ export default function NftFeed(props: any) {
 
   return (
     <div className={styles.feedContainer}>
+      <h1>{props.collectionName}</h1>
       {!props.onlyFeed && (
         <div className={styles.filter}>
           <label htmlFor="filter">
@@ -57,7 +58,6 @@ export default function NftFeed(props: any) {
           />
         </div>
       )}
-      <h2>{props.collectionName}</h2>
       <div className={styles.feed}>{displayNfts}</div>
       {!props.onlyFeed && (
         <div className={styles.paginationContainer}>
@@ -80,7 +80,7 @@ function NftItem(props: any) {
 
   return (
     <div className={styles.card}>
-      <Link href={`/contract/${props.contractAddress}/${props.nft.tokenId}`}>
+      <Link href={`/contract/${props.contractAddress}/item/${props.nft.tokenId}`}>
         <Image
           className={styles.image}
           src={props.nft.media[0].gateway}
@@ -103,12 +103,13 @@ function NftItem(props: any) {
         </ul>
       )}
       {/* The key prop is used here to reload the button at each page change */}
-      {/* {userId === "" ? null : (
+      {userId === "" ? null : (
         <LikeButton
           nftId={props.nft.tokenId}
+          contractAddress={props.contractAddress}
           key={props.pageNumber + "_" + props.filter}
         />
-      )} */}
+      )}
     </div>
   );
 }

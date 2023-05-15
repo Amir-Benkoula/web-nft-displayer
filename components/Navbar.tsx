@@ -1,20 +1,19 @@
 import WalletButton from "./WalletButton";
 import styles from "../styles/components/Navbar.module.css";
 import Link from "next/link";
-import { ContractContext } from "../lib/context";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { SearchOutlined } from "@ant-design/icons";
 
 export default function Navbar() {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [collectionAddress, setCollectionAddress] = useState('');
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    window.location.href = `/contract/${searchTerm}`;
+    window.location.href = `/contract/${collectionAddress}`;
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
+    setCollectionAddress(event.target.value);
   };
 
   return (
@@ -27,29 +26,29 @@ export default function Navbar() {
               Home
             </Link>
           </li> */}
-          <li className={styles.logoText}>
+          <li className={styles.logo}>
             <Link href="/">
               <h2>Home</h2>
             </Link>
           </li>
-          <li>
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="searchTerm"><SearchOutlined /></label>
-            <input
-              id="searchTerm"
-              type="text"
-              value={searchTerm}
-              onChange={handleInputChange}
-              placeholder="Enter a contract id"
-            />
-            <button type="submit">Submit</button>
-          </form>
+          <li className={styles.search}>
+            <form onSubmit={handleSubmit}>
+              <label htmlFor="collectionAddress"><SearchOutlined /></label>
+              <input
+                id="collectionAddress"
+                type="text"
+                value={collectionAddress}
+                onChange={handleInputChange}
+                placeholder="Enter a contract id"
+              />
+              <button type="submit">Submit</button>
+            </form>
           </li>
-          <li>
+          {/* <li>
             <Link href="/top-nfts">
               <button className={styles.button}>Top Nfts</button>
             </Link>
-          </li>
+          </li> */}
           <li>
             <WalletButton />
           </li>

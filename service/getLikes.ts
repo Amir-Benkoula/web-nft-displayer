@@ -2,8 +2,8 @@ import { collection, doc, getDoc } from "firebase/firestore";
 import { firestore } from "../lib/firebase";
 
 // Get likers array of an item
-export async function getLikes(nftId: string) {
-  const docId = `typewriter-${nftId}`;
+export async function getLikes(nftId: string, contractAddress: string) {
+  const docId = `${contractAddress}-item-${nftId}`;
   const nftRef = doc(collection(firestore, "nfts"), docId);
   const nftDoc = await getDoc(nftRef);
 
