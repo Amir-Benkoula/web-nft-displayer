@@ -2,7 +2,7 @@
   z-index: 2;
   height: 70px;
   width: 100%;
-  background: white;
+  background: rgba(255, 255, 255, 0.178);
   position: fixed;
   margin-bottom: 10em;
   top: 0;
@@ -24,6 +24,7 @@
 .logo {
   position: absolute;
   left: 0%;
+  color: #FF6B01;
 }
 
 .logoText {
@@ -87,9 +88,8 @@
 }
 
 .navbar form button[type="submit"] {
-  background-color: #222;
+  background-color: #FF6B01 ;
   color: #fff;
-  border: none;
   border-radius: 20px;
   padding: 7px 20px;
   font-size: 1.1rem;
@@ -97,5 +97,7 @@
 }
 
 .navbar form button[type="submit"]:hover {
-  background-color: #444;
+  color: #FF6B01;
+  border: 1px solid #ff6b017a;
+  background-color: white ;
 }

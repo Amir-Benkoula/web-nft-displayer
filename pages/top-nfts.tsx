@@ -1,6 +1,5 @@
 import NftFeed from "../components/NftFeed";
 import { getTopNfts } from "../lib/firebase";
-import getNftMedatata from "../service/getNftMetadata";
 import styles from "../styles/Home.module.css";
 
 // Incremental Static Regeneration so data does not get stale

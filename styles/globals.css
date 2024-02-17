@@ -4,6 +4,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    background-color: #FFFFFF;
 }
 
 a {
@@ -16,9 +17,9 @@ a {
 }
 
 button {
-  background-color: white;
-  border: 1px solid rgba(179, 179, 179, 0.477);
-  color: rgb(37, 37, 37);
+  background-color: white ;
+  border: 1px solid #ff6b017a;
+  color: #FF6B01;
   margin: 0 7px;
   padding: 7px 15px;
   border-radius: 10px;
@@ -27,6 +28,65 @@ button {
 
 button:hover {
   color: white;
-  background-color: #0070f3;
+  background-color: #FF6B01;
   cursor: pointer;
+}
+
+.home-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  margin-top: 8%;
+  font-size: 4em;
+}
+
+.card img{
+  min-width: 200px;
+  min-height: 250px;
+  height: 250px;
+  border-radius: 10px;
+}
+
+.scroller {
+  width: 100%;
+  margin-top: 1em;
+  overflow: hidden;
+}
+
+.scroller__inner {
+  display: flex;
+  gap: 1em;
+}
+
+/* .scroller[data-animated="true"] {
+  mask: linear-gradient(90deg, transparent, white 5%, white 95%, transparent);
+} */
+
+.scroller[data-animated="true"] .scroller__inner {
+  width: max-content;
+  animation: 
+    scroll 
+    40s 
+    var(--_animation-direction, forwards)
+    linear 
+    infinite;
+}
+
+.scroller[data-direction="right"] {
+  --_animation-direction: reverse;
+}
+
+.scroller[data-direction="left"] {
+  --_animation-direction: forwards;
+}
+
+@keyframes scroll {
+  to {
+    transform: translate(calc(-50% - .5rem));
+  }
 }
