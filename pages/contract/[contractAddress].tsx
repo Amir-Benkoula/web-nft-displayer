@@ -13,7 +13,7 @@ export async function getServerSideProps({ params }: any) {
   const name = contract.name;
 
   const nfts = await getNfts(contractAddress);
-
+  console.log('get nfts server side', nfts);
   return {
     props: { nfts, name, contractAddress },
   };

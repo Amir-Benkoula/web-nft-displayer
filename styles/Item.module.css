@@ -1,5 +1,7 @@
 .main {
   padding-top: 13rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 @media screen and (max-width: 1004px) {
@@ -14,7 +16,6 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  width: 100%;
   min-width: 380px;
   margin: 1rem;
   padding: 1.5rem;
@@ -24,8 +25,8 @@
   width: 500px;
   min-width: 300px;
   aspect-ratio: 1 / 1;
+  box-shadow: 0 0 10px rgb(41, 41, 41);
   border-radius: 10px;
-  box-shadow: 0 0 10px rgb(208, 208, 208);
 }
 
 .nftInfo {

@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 
-export default function CardCarousel() {
+export default function CardCarousel(props: { direction: string; }) {
   const cards: JSX.Element[] = [];
 
   const getRandomImage = () => {
@@ -33,12 +33,7 @@ export default function CardCarousel() {
   }
   return (
     <>
-      <div className="scroller" data-direction="left">
-        <div className="scroller__inner">
-          {cards}
-        </div>
-      </div>
-      <div className="scroller" data-direction="right">
+      <div className="scroller" data-direction={props.direction}>
         <div className="scroller__inner">
           {cards}
         </div>

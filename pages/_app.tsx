@@ -5,7 +5,6 @@ import type { AppProps } from "next/app";
 import Navbar from "../components/Navbar";
 import { useRouter } from "next/router";
 import { Backdrop, CircularProgress } from "@mui/material";
-import CardCarousel from "../components/CardCarousel";
 
 export default function App({ Component, pageProps }: AppProps) {
   const [userId, setUserId] = useState("");
@@ -60,10 +59,6 @@ export default function App({ Component, pageProps }: AppProps) {
           <CircularProgress color="inherit" />
         </Backdrop>
       )}
-      <div className="home-container">
-        <h1 className="title">Explore and save your favorite nft's</h1>
-        <CardCarousel />
-      </div>
     </UserContext.Provider>
   );
 }
