@@ -1,6 +1,6 @@
-# 20 Mint Nft Web App
+# Web Nft Displayer
 
-This app is my submission to an assessment. It is available at https://web-nft-displayer.vercel.app/
+It is available at https://web-nft-displayer.vercel.app/
 
 ## Environment Variables
 
